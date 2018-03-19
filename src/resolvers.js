@@ -54,6 +54,15 @@ const resolvers = {
       return axios.all(urls).then(axios.spread((...chars) => chars));
     },
   },
+  Location: {
+    residents({ residents }) {
+      const urls = residents.map(url =>
+        axios.get(url).then(({ data }) => data)
+      );
+
+      return axios.all(urls).then(axios.spread((...resids) => resids));
+    },
+  },
 };
 
 export default resolvers;

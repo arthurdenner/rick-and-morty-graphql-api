@@ -44,6 +44,11 @@ const resolvers = {
 
       return axios.get(url).then(({ data }) => data);
     },
+    locations(_, args) {
+      const url = getURL('location/', args);
+
+      return axios.get(url).then(({ data }) => data);
+    },
   },
   Character: {
     episodes({ episode }) {

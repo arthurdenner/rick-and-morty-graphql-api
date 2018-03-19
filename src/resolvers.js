@@ -34,6 +34,11 @@ const resolvers = {
 
       return axios.get(url).then(({ data }) => data);
     },
+    episodes(_, args) {
+      const url = getURL('episode/', args);
+
+      return axios.get(url).then(({ data }) => data);
+    },
     location(_, { id }) {
       const url = getURL(`location/${id}`);
 

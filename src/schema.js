@@ -41,10 +41,7 @@ const typeDefs = `
   }
 
   type Characters {
-    count: Int,
-    pages: Int,
-    nextPage: Int,
-    prevPage: Int,
+    info: Information
     results: [Character]
   }
 
@@ -57,10 +54,7 @@ const typeDefs = `
   }
 
   type Episodes {
-    count: Int,
-    pages: Int,
-    nextPage: Int,
-    prevPage: Int,
+    info: Information
     results: [Episode]
   }
 
@@ -73,11 +67,15 @@ const typeDefs = `
   }
 
   type Locations {
+    info: Information
+    results: [Location]
+  }
+
+  type Information {
     count: Int,
     pages: Int,
-    nextPage: Int,
-    prevPage: Int,
-    results: [Location]
+    next: Int,
+    prev: Int,
   }
 `;
 

@@ -45,6 +45,15 @@ const resolvers = {
       return axios.get(origin.url).then(({ data }) => data);
     },
   },
+  Episode: {
+    characters({ characters }) {
+      const urls = characters.map(url =>
+        axios.get(url).then(({ data }) => data)
+      );
+
+      return axios.all(urls).then(axios.spread((...chars) => chars));
+    },
+  },
 };
 
 export default resolvers;

@@ -2,12 +2,30 @@ import axios from 'axios';
 
 const baseURL = 'https://rickandmortyapi.com/api';
 
-const getURL = path => `${baseURL}/${path}`;
+const getFilters = filters => filters.map(([k, v]) => `${k}=${v}`).join('&');
+const getId = url => (url ? url.replace(/^\D+/g, '') : null);
+const getURL = (path, args = {}) => {
+  let url = `${baseURL}/${path}`;
+
+  const filters = Object.entries(args);
+
+  if (filters.length) {
+    const queries = getFilters(filters);
+    url += `?${queries}`;
+  }
+
+  return url;
+};
 
 const resolvers = {
   Query: {
     character(_, { id }) {
       const url = getURL(`character/${id}`);
+
+      return axios.get(url).then(({ data }) => data);
+    },
+    characters(_, args) {
+      const url = getURL('character/', args);
 
       return axios.get(url).then(({ data }) => data);
     },
@@ -61,6 +79,14 @@ const resolvers = {
       );
 
       return axios.all(urls).then(axios.spread((...resids) => resids));
+    },
+  },
+  Information: {
+    next({ next }) {
+      return getId(next);
+    },
+    prev({ prev }) {
+      return getId(prev);
     },
   },
 };

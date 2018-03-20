@@ -22,6 +22,8 @@ app.use(
   bodyParser.json(),
   graphqlExpress({
     schema,
+    tracing: true,
+    cacheControl: true,
     validationRules: [depthLimit(3)],
   })
 );

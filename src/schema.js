@@ -27,7 +27,7 @@ const typeDefs = `
     ): Locations
   }
 
-  type Character {
+  type Character @cacheControl(maxAge: 86400) {
     id: Int,
     name: String,
     species: String,
@@ -45,7 +45,7 @@ const typeDefs = `
     results: [Character]
   }
 
-  type Episode {
+  type Episode @cacheControl(maxAge: 86400) {
     id: Int,
     name: String,
     episode: String,
@@ -58,7 +58,7 @@ const typeDefs = `
     results: [Episode]
   }
 
-  type Location {
+  type Location @cacheControl(maxAge: 86400) {
     id: Int,
     name: String,
     type: String,

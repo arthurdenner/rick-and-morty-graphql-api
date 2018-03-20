@@ -1,12 +1,12 @@
-import express from 'express';
-import { graphqlExpress, graphiqlExpress } from 'apollo-server-express';
-import { ApolloEngine } from 'apollo-engine';
-import depthLimit from 'graphql-depth-limit';
-import bodyParser from 'body-parser';
-import compression from 'compression';
-import schema from './src/schema';
+const express = require('express');
+const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
+const { ApolloEngine } = require('apollo-engine');
+const depthLimit = require('graphql-depth-limit');
+const bodyParser = require('body-parser');
+const compression = require('compression');
+const schema = require('./src/schema');
 
-require('dotenv').config();
+require('now-env');
 
 const GRAPHQL_PORT = 3000;
 
@@ -27,19 +27,18 @@ app.use(
     validationRules: [depthLimit(3)],
   })
 );
-app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql' }));
+app.use('/', graphiqlExpress({ endpointURL: '/graphql' }));
+
+const PORT = process.env.PORT || GRAPHQL_PORT;
 
 engine.listen(
   {
-    port: GRAPHQL_PORT,
+    port: PORT,
     graphqlPaths: ['/graphql'],
     expressApp: app,
     launcherOptions: {
       startupTimeout: 3000,
     },
   },
-  () =>
-    console.log(
-      `GraphiQL is now running on http://localhost:${GRAPHQL_PORT}/graphiql`
-    )
+  () => console.log(`GraphiQL is now running on port ${PORT}`)
 );

@@ -1,9 +1,9 @@
-import axios from 'axios';
+const axios = require('axios');
 
 const baseURL = 'https://rickandmortyapi.com/api';
 
 const getFilters = filters => filters.map(([k, v]) => `${k}=${v}`).join('&');
-const getId = url => (url ? url.replace(/^\D+/g, '') : null);
+const getId = url => (url ? url.replace(/[^0-9]/g, '') : null);
 const getURL = (path, args = {}) => {
   let url = `${baseURL}/${path}`;
 
@@ -101,4 +101,4 @@ const resolvers = {
   },
 };
 
-export default resolvers;
+module.exports = resolvers;

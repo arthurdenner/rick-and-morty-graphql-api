@@ -8,7 +8,7 @@ const schema = require('./src/schema');
 
 require('now-env');
 
-const GRAPHQL_PORT = 3000;
+const GRAPHQL_PORT = process.env.PORT || 3000;
 
 const engine = new ApolloEngine({
   apiKey: process.env.ENGINE_API_KEY,
@@ -29,16 +29,14 @@ app.use(
 );
 app.use('/', graphiqlExpress({ endpointURL: '/graphql' }));
 
-const PORT = process.env.PORT || GRAPHQL_PORT;
-
 engine.listen(
   {
-    port: PORT,
+    port: GRAPHQL_PORT,
     graphqlPaths: ['/graphql'],
     expressApp: app,
     launcherOptions: {
       startupTimeout: 3000,
     },
   },
-  () => console.log(`GraphiQL is now running on port ${PORT}`)
+  () => console.log(`GraphiQL is now running on port ${GRAPHQL_PORT}`)
 );

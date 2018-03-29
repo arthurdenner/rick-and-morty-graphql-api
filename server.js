@@ -32,7 +32,6 @@ app.use('/', graphiqlExpress({ endpointURL: '/graphql' }));
 engine.listen(
   {
     port: GRAPHQL_PORT,
-    graphqlPaths: ['/graphql'],
     expressApp: app,
     launcherOptions: {
       startupTimeout: 3000,

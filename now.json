@@ -1,4 +1,5 @@
 {
   "alias": "rickandmortyapi-gql",
-  "name": "rickandmortyapi-gql"
+  "name": "rickandmortyapi-gql",
+  "public": true
 }

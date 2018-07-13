@@ -1,6 +1,6 @@
 {
   "name": "rick-and-morty-graphql-api",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "description": "GraphQL wrapper for the Rick and Morty API",
   "main": "server.js",
   "scripts": {

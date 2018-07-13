@@ -1,7 +1,4 @@
 {
   "alias": "rickandmortyapi-gql",
-  "name": "rickandmortyapi-gql",
-  "env": {
-    "ENGINE_API_KEY": "@engine-api-key"
-  }
+  "name": "rickandmortyapi-gql"
 }

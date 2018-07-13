@@ -1,41 +1,14 @@
-const express = require('express');
-const { graphqlExpress, graphiqlExpress } = require('apollo-server-express');
-const { ApolloEngine } = require('apollo-engine');
+const { ApolloServer } = require('apollo-server');
 const depthLimit = require('graphql-depth-limit');
-const bodyParser = require('body-parser');
-const compression = require('compression');
-const schema = require('./src/schema');
+const resolvers = require('./src/resolvers');
+const typeDefs = require('./src/typeDefs');
 
-require('now-env');
-
-const GRAPHQL_PORT = process.env.PORT || 3000;
-
-const engine = new ApolloEngine({
-  apiKey: process.env.ENGINE_API_KEY,
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  validationRules: [depthLimit(3)],
 });
 
-const app = express();
-
-app.use(compression());
-app.use(
-  '/graphql',
-  bodyParser.json(),
-  graphqlExpress({
-    schema,
-    tracing: true,
-    cacheControl: true,
-    validationRules: [depthLimit(3)],
-  })
-);
-app.use('/', graphiqlExpress({ endpointURL: '/graphql' }));
-
-engine.listen(
-  {
-    port: GRAPHQL_PORT,
-    expressApp: app,
-    launcherOptions: {
-      startupTimeout: 3000,
-    },
-  },
-  () => console.log(`GraphiQL is now running on port ${GRAPHQL_PORT}`)
-);
+server.listen().then(({ url }) => {
+  console.log(`🚀 Server ready at ${url}`);
+});

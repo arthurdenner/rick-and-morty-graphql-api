@@ -29,6 +29,11 @@ const resolvers = {
 
       return axios.get(url).then(({ data }) => data);
     },
+    multipleCharacters(_, { ids }) {
+      const url = getURL(`character/${ids.join(',')}`);
+
+      return axios.get(url).then(({ data }) => data);
+    },
     episode(_, { id }) {
       const url = getURL(`episode/${id}`);
 
@@ -39,6 +44,11 @@ const resolvers = {
 
       return axios.get(url).then(({ data }) => data);
     },
+    multipleEpisodes(_, { ids }) {
+      const url = getURL(`episode/${ids.join(',')}`);
+
+      return axios.get(url).then(({ data }) => data);
+    },
     location(_, { id }) {
       const url = getURL(`location/${id}`);
 
@@ -46,6 +56,11 @@ const resolvers = {
     },
     locations(_, args) {
       const url = getURL('location/', args);
+
+      return axios.get(url).then(({ data }) => data);
+    },
+    multipleLocations(_, { ids }) {
+      const url = getURL(`location/${ids.join(',')}`);
 
       return axios.get(url).then(({ data }) => data);
     },

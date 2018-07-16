@@ -11,8 +11,10 @@ const typeDefs = gql`
       type: String
       gender: String
     ): Characters
+    multipleCharacters(ids: [Int]!): [Character]
     episode(id: Int!): Episode
     episodes(page: Int, name: String, episode: String): Episodes
+    multipleEpisodes(ids: [Int]!): [Episode]
     location(id: Int!): Location
     locations(
       page: Int
@@ -20,6 +22,7 @@ const typeDefs = gql`
       type: String
       dimension: String
     ): Locations
+    multipleLocations(ids: [Int]!): [Location]
   }
 
   type Character {

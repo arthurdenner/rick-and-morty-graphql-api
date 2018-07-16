@@ -4,6 +4,7 @@
   "description": "GraphQL wrapper for the Rick and Morty API",
   "main": "server.js",
   "scripts": {
+    "deploy": "now && now alias",
     "start": "node ./server.js",
     "dev": "nodemon ./server.js",
     "lint": "eslint .",
